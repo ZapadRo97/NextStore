@@ -11,6 +11,20 @@ public class User {
     public User() {
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", accessLevel=" + accessLevel +
+                '}';
+    }
+
     public User(String firstName, String lastName, String nickname, String email, String password, String phoneNumber, int accesLevel) {
         this.firstName = firstName;
         this.lastName = lastName;

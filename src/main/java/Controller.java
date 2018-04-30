@@ -4,6 +4,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Controller {
 
     private SessionFactory sessionFactory;
@@ -58,6 +61,30 @@ public class Controller {
     public Integer addUser(String firstName, String lastName, String nickname, String email, String password, String phoneNumber)
     {
        return addUser(firstName, lastName, nickname, email, password, phoneNumber, 0);
+    }
+    public ArrayList<User> getUsersList()
+    {
+        Transaction tx = null;
+        List users = null;
+        try{
+            tx = getSession().beginTransaction();
+            users = getSession().createQuery("FROM User").list();
+            tx.commit();
+        }
+        catch(HibernateException ex)
+        {
+            if(tx != null)
+                tx.rollback();
+            ex.printStackTrace();
+        }
+        finally{
+            closeSession();
+        }
+
+        //TODO: check the list before returning
+        ArrayList<User> listOfUsers = new ArrayList<>(users.size());
+        listOfUsers.addAll(users);
+        return listOfUsers;
     }
 
 }
