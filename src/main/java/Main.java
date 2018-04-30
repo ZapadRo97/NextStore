@@ -9,6 +9,7 @@ public class Main {
 
         Controller controller = new Controller();
         //controller.addUser("Matei", "Ioan", "matio", "mation@mat.io", "12345", "0734");
+        //controller.deleteUser(3);
         //ArrayList<User> au = controller.getUsersList();
         //System.out.println("Number of users: " + au.size());
         //System.out.println(au.toString());

@@ -86,5 +86,24 @@ public class Controller {
         listOfUsers.addAll(users);
         return listOfUsers;
     }
-
+    public void deleteUser(Integer UserID)
+    {
+        Transaction tx = null;
+        try{
+            tx = getSession().beginTransaction();
+            User user = (User)getSession().get(User.class, UserID);
+            getSession().delete(user);
+            tx.commit();
+        }
+        catch(HibernateException ex)
+        {
+            if(tx != null)
+                tx.rollback();
+            ex.printStackTrace();
+        }
+        finally{
+            closeSession();
+        }
+        System.out.println("The use with id " + UserID + " has been deleted successfully");
+    }
 }
