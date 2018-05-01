@@ -36,6 +36,13 @@
             <version>2.5</version>
         </dependency>
 
+        <!-- SPARK TEMPLATE ENGINE MUSTACHE -->
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-template-mustache</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
         <!-- HIBERNATE -->
         <dependency>
             <groupId>org.hibernate</groupId>
