@@ -36,10 +36,17 @@
             <version>2.5</version>
         </dependency>
 
-        <!-- SPARK TEMPLATE ENGINE MUSTACHE -->
+        <!-- SPARK DEBUG -->
         <dependency>
             <groupId>com.sparkjava</groupId>
-            <artifactId>spark-template-mustache</artifactId>
+            <artifactId>spark-debug-tools</artifactId>
+            <version>0.5</version>
+        </dependency>
+
+        <!-- SPARK TEMPLATE ENGINE THYMELEAF -->
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-template-thymeleaf</artifactId>
             <version>2.7.1</version>
         </dependency>
 

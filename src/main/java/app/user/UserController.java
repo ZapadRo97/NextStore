@@ -1,3 +1,5 @@
+package app.user;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
+public class UserController {
 
     private SessionFactory sessionFactory;
     private Session session;
