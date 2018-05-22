@@ -1,3 +1,4 @@
+import app.dashboard.DashboardController;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
@@ -26,16 +27,11 @@ public class Main {
         //System.out.println("Number of users: " + au.size());
         //System.out.println(au.toString());
 
-        //Map map = new HashMap();
-        //map.put("name", "Sam");
-
-        // hello.mustache file is in resources/templates directory
-        //get("/hello", (rq, rs) -> new ModelAndView(map, "hello"), new ThymeleafTemplateEngine());
-
 
         // Configure Spark
         port(4567);
-        staticFiles.location("/public");
+        //staticFiles.location("/public");
+        staticFileLocation("/public");
         staticFiles.expireTime(600L);
         enableDebugScreen();
 
@@ -43,13 +39,32 @@ public class Main {
         before("*",                  Filters.addTrailingSlashes);
 
         // Set up routes
-        //get(Path.Web.INDEX,          IndexController.serveIndexPage);
+        get("/index/",          IndexController.serveIndexPage);
+        get("/",                 IndexController.serveIndexPage);
+        get("/dashboard/",         DashboardController.serveAdminPage);
+        get("/dashboard/user-management/",         DashboardController.serveUserManagementPage);
+        get("/dashboard/product-management/",      DashboardController.serveAdminPage);
+        get("/dashboard/users/0/",            DashboardController.serveNewUserPage);
+        post("/dashboard/users/0/",           DashboardController.handleNewUser);
+        get("/dashboard/users/:uid/",           DashboardController.serveUserEditPage);
+        post("/dashboard/users/:uid/",           DashboardController.finishEditUser);
+        get("/dashboard/deleteu/:uid/",         DashboardController.handleDeleteUser);
         //get(Path.Web.BOOKS,          BookController.fetchAllBooks);
         //get(Path.Web.ONE_BOOK,       BookController.fetchOneBook);
         get("/login/",          LoginController.serveLoginPage);
-        //post(Path.Web.LOGIN,         LoginController.handleLoginPost);
-        //post(Path.Web.LOGOUT,        LoginController.handleLogoutPost);
+        get("/signup/",         LoginController.serveSignUpPage);
+        post("/signup/",         LoginController.handleSignUpPost);
+        post("/login/",          LoginController.handleLoginPost);
+
+        get("/logout/",        LoginController.handleLogout);
         //get("*",                     ViewUtil.notFound);
+
+        //Map map = new HashMap();
+        //map.put("name", "Sam");
+        //get("/test/", (rq, rs) -> new ModelAndView(map, "login"), new ThymeleafTemplateEngine());
+
+
+
 
         //Set up after-filters (called after each get/post)
         after("*",                   Filters.addGzipHeader);

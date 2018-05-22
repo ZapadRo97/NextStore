@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <thymeleaf th:replace="head :: head" />
+    <!-- Custom styles for this template -->
+    <link href="../starter-template.css" rel="stylesheet">
+    <title>NextStore</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="dashboard">
+    <div class="container">
+        <div th:replace="layout :: navbar"></div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/dashboard/user-management">User Management</a></li>
+                <li><a href="/dashboard/product-management">Product Management</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#" th:text="${currentUser}">User</a></li>
+                <li><a href="/logout/">Logout</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+<h2>Welcome to Administration Page</h2>
+<h4>Please use the buttons from the navbar to get started</h4>
+</div>
+
+</body>
+</html>

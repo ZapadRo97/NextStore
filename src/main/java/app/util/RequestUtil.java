@@ -20,4 +20,35 @@ public class RequestUtil {
     public static String getSessionCurrentUser(Request request) {
         return request.session().attribute("currentUser");
     }
+
+    public static String getQueryUsername(Request request) {
+        return request.queryParams("username");
+    }
+
+    public static String getQueryPassword(Request request) {
+        return request.queryParams("password");
+    }
+    public static String getQueryLastName(Request request) {
+        return request.queryParams("lastname");
+    }
+    public static String getQueryFirstName(Request request) {
+        return request.queryParams("firstname");
+    }
+    public static String getQueryEmail(Request request) {
+        return request.queryParams("email");
+    }
+    public static String getQueryPhoneNumber(Request request) {
+        return request.queryParams("phonenumber");
+    }
+    public static void checkAdmin(Request request, Response response)
+    {
+        if(request.session().attribute("loggedIn") == null || !(Boolean)request.session().attribute("loggedIn"))
+            response.redirect("/login/");
+        else if(request.session().attribute("isAdmin") == null || !(Boolean)request.session().attribute("isAdmin"))
+            response.redirect("/index/");
+    }
+
+    public static String getParamUserID(Request request) {
+        return request.params("uid");
+    }
 }

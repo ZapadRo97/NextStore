@@ -6,9 +6,26 @@ public class User {
     private String lastName;
     private String nickname;
     private String email;
-    private String password;
     private String phoneNumber;
     private int accessLevel;
+    private String salt;
+    private String hashedPassword;
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
 
     public User() {
     }
@@ -21,20 +38,20 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", accessLevel=" + accessLevel +
                 '}';
     }
 
-    public User(String firstName, String lastName, String nickname, String email, String password, String phoneNumber, int accesLevel) {
+    public User(String firstName, String lastName, String nickname, String email, String hashedPassword, String phoneNumber, int accesLevel, String salt) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = nickname;
         this.email = email;
-        this.password = password;
+        this.hashedPassword = hashedPassword;
         this.phoneNumber = phoneNumber;
         this.accessLevel = accesLevel;
+        this.salt = salt;
     }
 
     public int getId() {
@@ -77,14 +94,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -101,3 +110,4 @@ public class User {
         this.accessLevel = accesLevel;
     }
 }
+

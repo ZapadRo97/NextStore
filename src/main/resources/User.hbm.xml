@@ -18,9 +18,10 @@
         <property name = "lastName" column = "ULastName" type = "string"/>
         <property name = "nickname" column = "UNickname" type = "string"/>
         <property name = "email" column = "UEmail" type = "string"/>
-        <property name = "password" column = "UPassword" type = "string"/>
+        <property name = "hashedPassword" column = "UPassword" type = "string"/>
         <property name = "phoneNumber" column = "UPhoneNumber" type = "string"/>
         <property name = "accessLevel" column = "UAccessLevel" type = "int"/>
+        <property name = "salt" column = "USalt" type = "string"/>
 
     </class>
 </hibernate-mapping>

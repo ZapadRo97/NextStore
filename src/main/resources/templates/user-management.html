@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <thymeleaf th:replace="head :: head" />
+    <link href="../../starter-template.css" rel="stylesheet">
+    <title>NextStore</title>
+</head>
+<body>
+<nav th:replace="dashboard :: dashboard">
+</nav>
+
+<div class="container">
+    <h2>User Management</h2>
+    <table class="table table-hover">
+        <thead style="background-color: #212529; color: white">
+        <tr class="text-center">
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Nickname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <th:block th:each="user, iterStat : ${users}">
+            <tr>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.nickname}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phoneNumber}"></td>
+                <td> <div th:remove="tag" th:utext="${editLinks[iterStat.index]}"></div> <div th:remove="tag" th:utext="${deleteLinks[iterStat.index]}"></div> </td>
+            </tr>
+        </th:block>
+            <tr>
+                <td>New</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class="btn btn-success" href="/dashboard/users/0/">New User</a></td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+</body>
+</html>
