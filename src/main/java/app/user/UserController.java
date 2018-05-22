@@ -1,4 +1,5 @@
 package app.user;
+import app.util.SessionBase;
 import org.hibernate.query.Query;
 import org.mindrot.jbcrypt.*;
 
@@ -11,32 +12,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserController {
-
-    private SessionFactory sessionFactory;
-    private Session session;
-
-    private SessionFactory getSessionFactory() {
-        if(sessionFactory == null)
-        {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        }
-
-        return sessionFactory;
-    }
-
-    private Session getSession() {
-        if(session == null || !session.isOpen())
-        {
-            session = getSessionFactory().openSession();
-        }
-
-        return session;
-    }
-
-    private void closeSession() {
-        session.close();
-    }
+public class UserController extends SessionBase{
 
     //user related functions
     public Integer addUser(String firstName, String lastName, String nickname, String email, String hashedPassword, String phoneNumber, int accessLevel, String salt)
@@ -181,7 +157,7 @@ public class UserController {
         try{
             tx = getSession().beginTransaction();
 
-            Query query = session.createQuery("UPDATE User SET firstName = :firstName, lastName = :lastName, " +
+            Query query = getSession().createQuery("UPDATE User SET firstName = :firstName, lastName = :lastName, " +
                     "nickname = :nickname, email = :email, hashedPassword = :hashedPassword, phoneNumber = :phoneNumber," +
                     " salt = :salt " +
                     " where id = :id");

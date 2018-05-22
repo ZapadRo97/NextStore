@@ -125,4 +125,14 @@ public class DashboardController {
         return null;
     };
 
+    public static Route serveProductManagementPage = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        RequestUtil.checkAdmin(request, response);
+        model.put("currentUser", request.session().attribute("currentUser"));
+
+
+
+        return ViewUtil.render(request, model, "product-management");
+    };
+
 }

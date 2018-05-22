@@ -1,4 +1,8 @@
 package app.product;
 
-public class ProductController {
+
+import app.util.SessionBase;
+
+public class ProductController extends SessionBase {
+
 }

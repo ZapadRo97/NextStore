@@ -43,7 +43,7 @@ public class Main {
         get("/",                 IndexController.serveIndexPage);
         get("/dashboard/",         DashboardController.serveAdminPage);
         get("/dashboard/user-management/",         DashboardController.serveUserManagementPage);
-        get("/dashboard/product-management/",      DashboardController.serveAdminPage);
+        get("/dashboard/product-management/",      DashboardController.serveProductManagementPage);
         get("/dashboard/users/0/",            DashboardController.serveNewUserPage);
         post("/dashboard/users/0/",           DashboardController.handleNewUser);
         get("/dashboard/users/:uid/",           DashboardController.serveUserEditPage);
