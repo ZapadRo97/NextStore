@@ -6,7 +6,54 @@
     <title>NextStore</title>
 </head>
 <body>
-    <nav th:replace="dashboard :: dashboard">
-    </nav>
+<nav th:replace="dashboard :: dashboard">
+</nav>
+
+<div class="container">
+    <h2>Product Management</h2>
+
+    <table class="table table-hover">
+        <thead style="background-color: #212529; color: white">
+        <tr class="text-center">
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <th:block th:each="product, iterStat : ${products}">
+            <tr>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${categories[(product.categoryID)-1].name}"></td>
+                <td th:text="${product.price}"></td>
+                <td style="overflow: hidden;" th:text="${product.description}"></td>
+                <td> <a th:href="@{${'../../temp-images/' + product.imagePath}}"><img style="max-width: 200px;" th:src="${'../../temp-images/' + product.imagePath}" /></a> </td>
+                <td th:text="${product.quantity}"></td>
+                <td> <div th:remove="tag" th:utext="${editLinks[iterStat.index]}"></div> <div th:remove="tag" th:utext="${deleteLinks[iterStat.index]}"></div> </td>
+            </tr>
+        </th:block>
+
+        <tr>
+            <td>New</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a class="btn btn-success" href="/dashboard/products/0/">New Product</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
 </body>
 </html>

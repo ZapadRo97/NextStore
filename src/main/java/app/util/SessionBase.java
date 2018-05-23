@@ -10,17 +10,15 @@ public class SessionBase {
     private Session session;
 
     private SessionFactory getSessionFactory() {
-        if(sessionFactory == null)
-        {
+        if (sessionFactory == null) {
             sessionFactory = new Configuration().configure().buildSessionFactory();
         }
 
         return sessionFactory;
     }
 
-    protected Session getSession() {
-        if(session == null || !session.isOpen())
-        {
+    public Session getSession() {
+        if (session == null || !session.isOpen()) {
             session = getSessionFactory().openSession();
         }
 

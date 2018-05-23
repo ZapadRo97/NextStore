@@ -3,6 +3,8 @@ package app.util;
 
 import spark.*;
 
+import javax.servlet.http.Part;
+
 public class RequestUtil {
 
     public static boolean removeSessionAttrLoggedOut(Request request) {
@@ -51,4 +53,18 @@ public class RequestUtil {
     public static String getParamUserID(Request request) {
         return request.params("uid");
     }
+
+    public static String getParamProductID(Request request) {
+        return request.params("pid");
+    }
+
+    public static String getFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
+    }
+
 }

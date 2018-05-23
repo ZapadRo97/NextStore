@@ -7,7 +7,7 @@
     <class name = "app.user.User" table = "users">
 
         <meta attribute = "class-description">
-            This class contains the employee detail.
+            This class contains the user detail.
         </meta>
 
         <id name = "id" type = "int" column = "UAutoID">

@@ -1,0 +1,26 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "app.product.Product" table="products">
+        <meta attribute = "class-description">
+            This class contains the product detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "PAutoID">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" column="PName" type="string"/>
+        <property name="categoryID" column="PCategID" type="int"/>
+        <property name="description" column="PDesc" type="text"/>
+        <property name="image" column="PImage" type="blob"/>
+        <property name="price" column="PPrice" type="big_decimal"/>
+        <property name="quantity" column="PQuantity" type="int"/>
+        <property name="imagePath" column="PImageName" type="string"/>
+
+    </class>
+
+</hibernate-mapping>

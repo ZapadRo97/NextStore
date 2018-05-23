@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <thymeleaf th:replace="head :: head" />
+    <!-- Custom styles for this template -->
+    <link href="../../../starter-template.css" rel="stylesheet">
+    <title>NextStore(ADMIN) - Edit Product</title>
+</head>
+
+
+<body>
+
+<nav th:replace="dashboard :: dashboard">
+</nav>
+
+<div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="panel-title">Edit Product</div>
+        </div>
+        <div class="panel-body" >
+            <form id="signupform" class="form-horizontal" role="form" method="post" enctype='multipart/form-data'>
+
+                <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">Name</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="name" placeholder="Product Name" th:value="${product.name}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category" class="col-md-3 control-label">Category</label>
+                    <div class="col-md-9">
+                        <select name="category" class="form-control">
+                            <th:block th:each="category : ${categories}">
+                                <option th:selected="${category.id == product.categoryID}" th:value="${category.id}" th:text="${category.name}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image-select" class="col-md-3 control-label">Image</label>
+                    <div class="col-md-9">
+                        <input type="file" class="form-control-file" name="image" th:value="${product.imagePath}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price" class="col-md-3 control-label">Price</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="price" placeholder="Product Price" th:value="${product.price}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="stock" class="col-md-3 control-label">Quantity</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="stock" placeholder="Product Stock" th:value="${product.quantity}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control" rows="5" name="description" th:text="${product.description}"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Edit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+</body>
+</html>

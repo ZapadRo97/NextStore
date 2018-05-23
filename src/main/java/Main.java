@@ -41,21 +41,28 @@ public class Main {
         // Set up routes
         get("/index/",          IndexController.serveIndexPage);
         get("/",                 IndexController.serveIndexPage);
+
         get("/dashboard/",         DashboardController.serveAdminPage);
         get("/dashboard/user-management/",         DashboardController.serveUserManagementPage);
         get("/dashboard/product-management/",      DashboardController.serveProductManagementPage);
+
         get("/dashboard/users/0/",            DashboardController.serveNewUserPage);
         post("/dashboard/users/0/",           DashboardController.handleNewUser);
         get("/dashboard/users/:uid/",           DashboardController.serveUserEditPage);
         post("/dashboard/users/:uid/",           DashboardController.finishEditUser);
         get("/dashboard/deleteu/:uid/",         DashboardController.handleDeleteUser);
-        //get(Path.Web.BOOKS,          BookController.fetchAllBooks);
-        //get(Path.Web.ONE_BOOK,       BookController.fetchOneBook);
+
+        get("dashboard/products/0/",             DashboardController.serveNewProductPage);
+        post("/dashboard/products/0/",           DashboardController.handleNewProduct);
+        get("/dashboard/products/:pid/",         DashboardController.serveProductEditPage);
+        post("/dashboard/products/:pid/",        DashboardController.finishEditProduct);
+        get("/dashboard/deletep/:pid/",          DashboardController.handleDeleteProduct);
+
+
         get("/login/",          LoginController.serveLoginPage);
         get("/signup/",         LoginController.serveSignUpPage);
         post("/signup/",         LoginController.handleSignUpPost);
         post("/login/",          LoginController.handleLoginPost);
-
         get("/logout/",        LoginController.handleLogout);
         //get("*",                     ViewUtil.notFound);
 

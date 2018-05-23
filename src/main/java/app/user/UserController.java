@@ -183,6 +183,6 @@ public class UserController extends SessionBase{
         {
             closeSession();
         }
-        System.out.println("An user has been added");
+        System.out.println("An user has been edited");
     }
 }
