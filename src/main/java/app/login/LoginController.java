@@ -1,5 +1,6 @@
 package app.login;
 
+import app.basket.BasketController;
 import app.user.*;
 import app.util.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -14,7 +15,7 @@ public class LoginController {
         Map<String, Object> model = new HashMap<>();
 
         if(request.session().attribute("loggedIn") != null && request.session().attribute("loggedIn").equals(true))
-            response.redirect("/index/");
+            response.redirect("/index/all/");
 
         model.put("authenticationFailed", false);
         return ViewUtil.render(request, model, "login");
@@ -24,7 +25,7 @@ public class LoginController {
         Map<String, Object> model = new HashMap<>();
 
         if(request.session().attribute("loggedIn") != null && request.session().attribute("loggedIn").equals(true))
-            response.redirect("/index/");
+            response.redirect("/index/all/");
 
 
         return ViewUtil.render(request, model, "signup");
@@ -38,6 +39,9 @@ public class LoginController {
             return ViewUtil.render(request, model, "login");
         }
 
+
+        User us = uc.getUserByUsername(getQueryUsername(request));
+        BasketController.createBasket(us.getId());
         //request.session().attribute("currentUser", getQueryUsername(request));
         //if (getQueryLoginRedirect(request) != null) {
         //    response.redirect(getQueryLoginRedirect(request));
@@ -57,13 +61,18 @@ public class LoginController {
         else
         {
             request.session().attribute("isAdmin", false);
-            response.redirect("/index/");
+            response.redirect("/index/all/");
         }
 
         return null;
     };
 
     public static Route handleLogout = (Request request, Response response) -> {
+
+        UserController uc = new UserController();
+        User us = uc.getUserByUsername(request.session().attribute("currentUser"));
+        BasketController.deleteBasket(us.getId());
+
         request.session().removeAttribute("currentUser");
         request.session().attribute("loggedIn", false);
         response.redirect("/login/");

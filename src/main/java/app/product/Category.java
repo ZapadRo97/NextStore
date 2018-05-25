@@ -11,4 +11,5 @@ public class Category {
 
     @Getter @Setter int id;
     @Getter @Setter private String name;
+    @Getter @Setter private int numberOfSoldProducts;
 }

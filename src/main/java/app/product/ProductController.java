@@ -34,13 +34,16 @@ public class ProductController extends SessionBase {
         System.out.println("A product has been added");
         return productID;
     }
-    public ArrayList<Product> getProductsList()
+    public ArrayList<Product> getProductsList(int category)
     {
         Transaction tx = null;
         List products = null;
         try{
             tx = getSession().beginTransaction();
-            products = getSession().createQuery("FROM Product").list();
+            if(category == 0)
+                products = getSession().createQuery("FROM Product").list();
+            else
+                products = getSession().createQuery("FROM Product WHERE categoryID =" + category).list();
             tx.commit();
         }
         catch(HibernateException ex)
@@ -58,6 +61,32 @@ public class ProductController extends SessionBase {
         listOfProducts.addAll(products);
         return listOfProducts;
     }
+
+    public ArrayList<Product> getProductsListSearch(String search)
+    {
+        Transaction tx = null;
+        List products = null;
+        try{
+            tx = getSession().beginTransaction();
+            products = getSession().createQuery("FROM Product WHERE name LIKE '%" + search + "%'").list();
+            tx.commit();
+        }
+        catch(HibernateException ex)
+        {
+            if(tx != null)
+                tx.rollback();
+            ex.printStackTrace();
+        }
+        finally{
+            closeSession();
+        }
+
+        //TODO: check the list before returning
+        ArrayList<Product> listOfProducts = new ArrayList<>(products.size());
+        listOfProducts.addAll(products);
+        return listOfProducts;
+    }
+
     public void deleteProduct(Integer ProductID)
     {
         Transaction tx = null;

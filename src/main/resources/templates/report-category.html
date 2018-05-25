@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <thymeleaf th:replace="head :: head" />
+    <link href="../../starter-template.css" rel="stylesheet">
+    <title>NextStore</title>
+</head>
+<body>
+
+<nav th:replace="dashboard :: dashboard">
+</nav>
+
+<div class="container">
+    <h2>Sold Products by Category</h2>
+
+    <table class="table table-hover">
+        <thead style="background-color: #212529; color: white">
+        <tr class="text-center">
+            <th scope="col">Name</th>
+            <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+            <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+            <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+            <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+            <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+            <th scope="col">Sold Products</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <th:block th:each="category : ${categories}">
+            <tr>
+                <td th:text="${category.name}"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td th:text="${category.numberOfSoldProducts}"></td>
+            </tr>
+        </th:block>
+
+</body>
+</html>

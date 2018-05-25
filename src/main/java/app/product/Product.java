@@ -20,6 +20,20 @@ public class Product {
     @Getter @Setter private int quantity;
     @Getter @Setter private String imagePath;
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
 
+        if (this.getClass() != obj.getClass()) return false;
+        Product p = (Product)obj;
+        if(this.id != p.getId())
+            return false;
+
+        return true;
+
+    }
 }

@@ -135,7 +135,7 @@ public class DashboardController {
         RequestUtil.checkAdmin(request, response);
         model.put("currentUser", request.session().attribute("currentUser"));
         ProductController pc = new ProductController();
-        ArrayList<Product> products = pc.getProductsList();
+        ArrayList<Product> products = pc.getProductsList(0);
         model.put("products", products);
         CategoryController cc = new CategoryController();
         ArrayList<Category> categories = cc.getCategoryList();
@@ -261,5 +261,17 @@ public class DashboardController {
 
         response.redirect("/dashboard/product-management/");
         return null;
+    };
+
+    public static Route serveReportCategory = (Request request, Response response) -> {
+        Map<String, Object> model = new HashMap<>();
+        RequestUtil.checkAdmin(request, response);
+        model.put("currentUser", request.session().attribute("currentUser"));
+
+        CategoryController cc = new CategoryController();
+        ArrayList<Category> categories = cc.getCategoryList();
+        model.put("categories", categories);
+
+        return ViewUtil.render(request, model, "report-category");
     };
 }

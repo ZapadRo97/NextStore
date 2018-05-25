@@ -1,9 +1,12 @@
 package app.util;
 
 
+import app.product.Product;
+import app.product.ProductController;
 import spark.*;
 
 import javax.servlet.http.Part;
+import java.util.ArrayList;
 
 public class RequestUtil {
 
@@ -58,6 +61,10 @@ public class RequestUtil {
         return request.params("pid");
     }
 
+    public static String getParamCategID(Request request) {
+        return request.params("cid");
+    }
+
     public static String getFileName(Part part) {
         for (String cd : part.getHeader("content-disposition").split(";")) {
             if (cd.trim().startsWith("filename")) {
@@ -67,4 +74,59 @@ public class RequestUtil {
         return null;
     }
 
+    public static ArrayList<ArrayList<Product>> getProductsListOfLists(int category)
+    {
+        ProductController pc = new ProductController();
+        ArrayList<Product> products = null;
+
+        products = pc.getProductsList(category);
+
+
+        ArrayList<ArrayList<Product>> listOfLists = new ArrayList<>();
+        int index = 0;
+        ArrayList<Product> smallList = new ArrayList<>();
+        for(Product product : products)
+        {
+
+            smallList.add(product);
+            if(index == 3)
+            {
+                listOfLists.add(smallList);
+                smallList = new ArrayList<>();
+                index = 0;
+            }
+            index++;
+        }
+        if(!smallList.isEmpty())
+            listOfLists.add(smallList);
+
+        return listOfLists;
+    }
+
+    public static ArrayList<ArrayList<Product>> getProductsListOfListsSearch(String search)
+    {
+        ProductController pc = new ProductController();
+        ArrayList<Product> products = null;
+
+        products = pc.getProductsListSearch(search);
+
+        ArrayList<ArrayList<Product>> listOfLists = new ArrayList<>();
+        int index = 0;
+        ArrayList<Product> smallList = new ArrayList<>();
+        for(Product product : products)
+        {
+            smallList.add(product);
+            if(index == 3)
+            {
+                listOfLists.add(smallList);
+                smallList = new ArrayList<>();
+                index = 0;
+            }
+            index++;
+        }
+        if(!smallList.isEmpty())
+            listOfLists.add(smallList);
+
+        return listOfLists;
+    }
 }

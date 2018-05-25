@@ -1,3 +1,4 @@
+import app.basket.BasketController;
 import app.dashboard.DashboardController;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -39,8 +40,16 @@ public class Main {
         before("*",                  Filters.addTrailingSlashes);
 
         // Set up routes
-        get("/index/",          IndexController.serveIndexPage);
-        get("/",                 IndexController.serveIndexPage);
+        get("/index/all/",          IndexController.serveIndexPage);
+        post("/index/all/",          IndexController.getSearchedProduct);
+        get("/index/buy/",          IndexController.buyProducts);
+        get("/index/shopping-cart/",  IndexController.serveShoppingCartPage);
+        get("/index/shopping-cart/remove/:pid/", BasketController.removeProduct);
+        get("/index/:cid/",         IndexController.serveCategPage);
+        post("/index/all/",          IndexController.getSearchedProduct);
+        get("/index/add-to-cart/:pid/",  BasketController.addProductToBasket);
+
+        get("/",                 IndexController.serveRedirect);
 
         get("/dashboard/",         DashboardController.serveAdminPage);
         get("/dashboard/user-management/",         DashboardController.serveUserManagementPage);
@@ -58,6 +67,7 @@ public class Main {
         post("/dashboard/products/:pid/",        DashboardController.finishEditProduct);
         get("/dashboard/deletep/:pid/",          DashboardController.handleDeleteProduct);
 
+        get("/reports/category/",                DashboardController.serveReportCategory);
 
         get("/login/",          LoginController.serveLoginPage);
         get("/signup/",         LoginController.serveSignUpPage);

@@ -24,17 +24,11 @@
                     <ul class="dropdown-menu">
                         <li><a href="/index/all/">All Products</a></li>
                         <th:block th:each="category, iterStat : ${categories}">
-                            <li> <div th:remove="tag" th:utext="${categLinks[iterStat.index]}"></div> <!--<a th:href="@{'/index/' + ${category.id}}" th:value="${category.id}" th:text="${category.name}"> </a> --> </li>
+                            <li> <div th:remove="tag" th:utext="${categLinks[iterStat.index]}"></div> </li>
                         </th:block>
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search Product" name="product-name">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#" th:text="${currentUser}">User</a></li>
                 <li><a href="/logout/">Logout</a></li>
@@ -44,27 +38,26 @@
 </nav>
 
 <div class="container">
-    <h2>All Products</h2>
+    <h2 th:text="${categ + ' Products'}"></h2>
 
     <th:block th:each="prod, iter : ${products}">
-    <div class="row">
-        <th:block th:each="product : ${products[iter.index]}">
-        <div class="col-sm-6 col-md-3">
-            <div style="height:400px;overflow-y: scroll;" class="thumbnail">
-                <img style="max-width: 200px;" th:src="${'../../temp-images/' + product.imagePath}" />
-                <div class="caption">
-                    <h3 th:text="${product.name}">Name</h3>
-                    <p th:text="${product.description}">Description</p>
-                    <p style="font-weight: bold"> <span>Price:</span> <span th:text="${product.price}"></span></p>
-                    <p th:if="${product.quantity != 0}"><a th:href="@{${'../add-to-cart/' + product.id}}" class="btn btn-primary" role="button">Add to card</a></p>
-                    <p th:if="${product.quantity == 0}" style="color:red">Not in stock</p>
+        <div class="row">
+            <th:block th:each="product : ${products[iter.index]}">
+                <div class="col-sm-6 col-md-3">
+                    <div style="height:400px;overflow-y: scroll;" class="thumbnail">
+                        <img style="max-width: 200px;" th:src="${'../../temp-images/' + product.imagePath}" />
+                        <div class="caption">
+                            <h3 th:text="${product.name}">Name</h3>
+                            <p th:text="${product.description}">Description</p>
+                            <p style="font-weight: bold"> <span>Price:</span> <span th:text="${product.price}"></span></p>
+                            <p th:if="${product.quantity != 0}"><a th:href="@{${'../add-to-cart/' + product.id}}" class="btn btn-primary" role="button">Add to card</a></p>
+                            <p th:if="${product.quantity == 0}" style="color:red">Not in stock</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </th:block>
         </div>
-        </th:block>
-    </div>
     </th:block>
-
 </div>
 
 </body>
